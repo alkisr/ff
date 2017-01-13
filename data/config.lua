@@ -65,8 +65,8 @@ do local _ = {
     "echo",
     "send",
     "linkpv",
-    "sudolist"
-
+    "sudolist",
+    "html"  
   },
   help_text = "",
   help_text_realm = "",
