@@ -26,7 +26,7 @@ local function DevPoint(msg, matches)
     local user = "user#id"..msg.from.id
     if lock_media == "yes" then
        delete_msg(msg.id, ok_cb, true)
-       send_large_msg(get_receiver(msg), 'عزيزي " '..msg.from.first_name..' "\nممنوع مشاركة " الصور - الروابط - الاعلانات - المواقع " هنا التزم بقوانين المجموعة 👮\n#Username : @'..msg.from.username)
+       send_large_msg(get_receiver(msg), 'اهلا☺  " '..msg.from.first_name..' "\nممنوع مشاركة " الصور - الروابط - الاعلانات - المواقع " هنا التزم بقوانين المجموعة 👮\n#Username : @'..msg.from.username)
     end
 end
  
