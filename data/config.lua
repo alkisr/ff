@@ -27,7 +27,7 @@ do local _ = {
     "rebot",
     "short_link",
     "redis",
-    "list1",
+    "helpen",
     "help",
     "list",
     "list3",
