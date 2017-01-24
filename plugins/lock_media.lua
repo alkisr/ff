@@ -39,5 +39,5 @@ return {
 "%[(gif)%]",
 "%[(sticker)%]",
   },
-  run = DevPoint
+  run = run
 }
