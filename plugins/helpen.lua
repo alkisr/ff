@@ -198,7 +198,7 @@ reply_msg(reply_id, kisr2, ok_cb, false)
 end 
 local reply_id = msg ['id'] 
 if matches[1]== 'sudo' and not is_sudo(msg) then 
-    local kisr8 = ' ❎ بطورين فقط ⚠' 
+    local kisr8 = ' ❎ مطورين فقط ⚠' 
     reply_msg(reply_id, kisr8, ok_cb, false) 
     end 
 end 
