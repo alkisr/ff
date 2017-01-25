@@ -1,43 +1,47 @@
---[[
-#
-#ـــــــــــــــــــــــــــــــــــــــــــــــــــــــــــــــــــــــــــــــــــــــــــ
-#:((
-# For More Information ....! 
-# Developer : Aziz < @TH3_GHOST > 
-# our channel: @DevPointTeam
-# Version: 1.1
-#:))
-#ــــــــــــــــــــــــــــــــــــــــــــــــــــــــــــــــــــــــــــــــــــــــــــ
-#
-]]
-local function DevPoint(msg, matches)
-    if is_momod(msg) then
-        return
-    end
-    local data = load_data(_config.moderation.data)
-    if data[tostring(msg.to.id)] then
-        if data[tostring(msg.to.id)]['settings'] then
-            if data[tostring(msg.to.id)]['settings']['media'] then
-                lock_media = data[tostring(msg.to.id)]['settings']['media']
-            end
-        end
-    end
-    local chat = get_receiver(msg)
-    local user = "user#id"..msg.from.id
-    if lock_media == "yes" then
-       delete_msg(msg.id, ok_cb, true)
-       send_large_msg(get_receiver(msg), 'اهلا☺  " '..msg.from.first_name..' "\nممنوع مشاركة " الصور - الروابط - الاعلانات - المواقع " هنا التزم بقوانين المجموعة 👮\n#Username : @'..msg.from.username)
-    end
+
+do 
+local function pre_process(msg) 
+  local user = msg.from.id 
+local chat = msg.to.id 
+      local abrar = "mate:"..msg.to.id
+
+    if msg.media  and not is_momod(msg) and redis:get(abrar)  then
+     local v = "\n"..msg.from.first_name.."\n".."🔺 ممنوع ارسال الوسائط🔻".."\n".."💡 معرفك : @"..msg.from.username.."\n"
+     delete_msg(msg.id, ok_cb, false) 
+     reply_msg(msg.id, v, ok_cb, true) 
+         
 end
- 
-return {
-  patterns = {
-"%[(photo)%]",
-"%[(document)%]",
-"%[(video)%]",
-"%[(audio)%]",
-"%[(gif)%]",
-"%[(sticker)%]",
+        return msg 
+    end 
+
+local function Dev_ar(msg, matches) 
+
+    if matches[1] == "قفل الوسائط"  and is_momod(msg) then 
+                  local abrar = "mate:"..msg.to.id
+                    redis:set(abrar, true) 
+reply_msg(msg.id, "☑️ تم قفل 🔒 جميع الوسائط 🔕", ok_cb, true) 
+elseif matches[1] == "قفل الوسائط" and not is_momod(msg) then 
+reply_msg(msg.id, "للمشرفين فقط 🔺🔻", ok_cb, true) 
+  elseif is_momod(msg) and matches[1] == "فتح الوسائط" then
+      local abrar = "mate:"..msg.to.id
+      redis:del(abrar)
+reply_msg(msg.id, "☑️ تم فتح جميع الوسائط 🔓🔔", ok_cb, true) 
+elseif matches[1] == "فتح الوسائط" and not is_momod(msg) then 
+reply_msg(msg.id, "سوالف بال كبار كبد عمري🌝☕️", ok_cb, true) 
+end 
+end 
+
+return { 
+    patterns = { 
+    "^(قفل الوسائط)$", 
+    "^(فتح الوسائط)$", 
+    "%[(document)%]",
+    "%[(photo)%]",
+    "%[(video)%]",
+    "%[(audio)%]",
   },
-  run = run
-}
+run = Dev_ar, 
+    pre_process = pre_process 
+} 
+
+end
