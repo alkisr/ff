@@ -66,7 +66,8 @@ do local _ = {
     "send",
     "linkpv",
     "sudolist",
-    "html"  
+    "html",
+    "replay"  
   },
   help_text = "",
   help_text_realm = "",
@@ -75,9 +76,9 @@ do local _ = {
     data = "data/moderation.json"
   },
   sudo_users = {
-    124406196,
-    197920376,
-    224372882
+    286670331,
+    
+    
   }
 }
 return _
